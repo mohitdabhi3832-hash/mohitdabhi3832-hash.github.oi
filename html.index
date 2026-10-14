@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Privacy Policy for 3D Snake – a fully offline, no-data-collection Android game. No ads, no tracking, no third-party SDKs." />
+  <title>Privacy Policy – 3D Snake</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────── */
+    :root {
+      --clr-bg:           #080c14;
+      --clr-surface:      #0e1420;
+      --clr-surface-2:    #141c2e;
+      --clr-border:       rgba(99, 202, 255, 0.12);
+      --clr-accent:       #63caff;
+      --clr-accent-2:     #7b61ff;
+      --clr-accent-3:     #00e5c0;
+      --clr-safe:         #00e5c0;
+      --clr-warning:      #ffb84d;
+      --clr-danger:       #ff4d6d;
+      --clr-text:         #e2e8f0;
+      --clr-text-muted:   #7d8fa3;
+      --clr-text-dim:     #4a5568;
+      --radius-sm:        8px;
+      --radius-md:        14px;
+      --radius-lg:        20px;
+      --radius-xl:        28px;
+      --shadow-glow:      0 0 40px rgba(99, 202, 255, 0.08);
+      --shadow-card:      0 4px 24px rgba(0, 0, 0, 0.4);
+      --font-body:        'Inter', system-ui, sans-serif;
+      --font-mono:        'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(99, 202, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 202, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      animation: orb-float 12s ease-in-out infinite alternate;
+    }
+    .orb-1 { width:500px;height:500px;background:radial-gradient(circle,rgba(99,202,255,.12) 0%,transparent 70%);top:-150px;left:-150px; }
+    .orb-2 { width:400px;height:400px;background:radial-gradient(circle,rgba(123,97,255,.10) 0%,transparent 70%);bottom:-100px;right:-100px;animation-delay:-6s; }
+    .orb-3 { width:300px;height:300px;background:radial-gradient(circle,rgba(0,229,192,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-3s; }
+
+    @keyframes orb-float {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,20px) scale(1.05); }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* Hero */
+    .hero { text-align: center; padding: 80px 0 60px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,229,192,.10);
+      border: 1px solid rgba(0,229,192,.25);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--clr-accent-3);
+      margin-bottom: 28px;
+    }
+    .hero-badge .dot {
+      width:7px;height:7px;border-radius:50%;background:var(--clr-accent-3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+    .hero h1 {
+      font-size: clamp(2rem,5vw,3.25rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      background: linear-gradient(135deg,#fff 0%,var(--clr-accent) 50%,var(--clr-accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .hero .subtitle { font-size: 1.1rem; color: var(--clr-text-muted); max-width: 540px; margin: 0 auto 32px; }
+    .hero-meta { display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;font-size:.82rem;color:var(--clr-text-dim); }
+
+    /* Quick Facts */
+    .quick-facts { display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:48px; }
+    .fact-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      text-align: center;
+      transition: border-color .3s, transform .3s;
+    }
+    .fact-card:hover { border-color:rgba(99,202,255,.3);transform:translateY(-3px); }
+    .fact-card .icon { font-size:1.8rem;display:block;margin-bottom:8px; }
+    .fact-card .label { font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--clr-accent-3);display:block;margin-bottom:4px; }
+    .fact-card .value { font-size:.85rem;font-weight:500;color:var(--clr-text); }
+
+    /* TOC */
+    .toc { background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:48px; }
+    .toc h2 { font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--clr-accent);margin-bottom:16px; }
+    .toc ol { list-style:none;counter-reset:toc-counter;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 24px; }
+    .toc li { counter-increment: toc-counter; }
+    .toc a {
+      display:flex;align-items:baseline;gap:10px;
+      color:var(--clr-text-muted);text-decoration:none;font-size:.88rem;padding:5px 0;transition:color .2s;
+    }
+    .toc a::before { content:counter(toc-counter,decimal-leading-zero);font-family:var(--font-mono);font-size:.72rem;color:var(--clr-accent-2);flex-shrink:0; }
+    .toc a:hover { color:var(--clr-accent); }
+
+    /* Divider */
+    .divider { height:1px;background:linear-gradient(90deg,transparent,var(--clr-border),transparent);margin:48px 0; }
+
+    /* Section */
+    .section { margin-bottom:52px;scroll-margin-top:24px; }
+    .section-header { display:flex;align-items:center;gap:14px;margin-bottom:20px; }
+    .section-number {
+      font-family:var(--font-mono);font-size:.72rem;font-weight:500;color:var(--clr-accent-2);
+      background:rgba(123,97,255,.12);border:1px solid rgba(123,97,255,.25);
+      border-radius:var(--radius-sm);padding:3px 10px;flex-shrink:0;
+    }
+    .section h2 { font-size:1.35rem;font-weight:700;letter-spacing:-.02em;color:#fff; }
+    .section h3 { font-size:1rem;font-weight:600;color:var(--clr-accent);margin:24px 0 10px; }
+    .section p { color:var(--clr-text-muted);margin-bottom:14px;font-size:.95rem; }
+    .section p:last-child { margin-bottom:0; }
+
+    /* Cards */
+    .card { background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:16px;transition:border-color .3s; }
+    .card:hover { border-color:rgba(99,202,255,.2); }
+    .card-title { font-weight:600;font-size:.95rem;color:#fff;margin-bottom:8px; }
+    .card p { margin-bottom:0; }
+
+    /* Pills */
+    .pill { display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle; }
+    .pill-safe    { background:rgba(0,229,192,.12);border:1px solid rgba(0,229,192,.3);color:var(--clr-safe); }
+    .pill-warning { background:rgba(255,184,77,.12);border:1px solid rgba(255,184,77,.3);color:var(--clr-warning); }
+    .pill-info    { background:rgba(99,202,255,.10);border:1px solid rgba(99,202,255,.25);color:var(--clr-accent); }
+
+    /* Permission Table */
+    .perm-table { width:100%;border-collapse:collapse;margin:16px 0;font-size:.88rem; }
+    .perm-table thead th { text-align:left;padding:10px 16px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--clr-text-dim);border-bottom:1px solid var(--clr-border); }
+    .perm-table tbody td { padding:14px 16px;border-bottom:1px solid rgba(99,202,255,.05);vertical-align:top; }
+    .perm-table tbody tr:last-child td { border-bottom:none; }
+    .perm-table tbody tr:hover td { background:rgba(99,202,255,.03); }
+    .perm-name { font-family:var(--font-mono);font-size:.82rem;color:var(--clr-accent); }
+
+    /* Data Table */
+    .data-table { width:100%;border-collapse:collapse;font-size:.88rem;margin:20px 0;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--clr-border); }
+    .data-table thead { background:var(--clr-surface-2); }
+    .data-table thead th { text-align:left;padding:12px 18px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--clr-text-dim); }
+    .data-table tbody td { padding:14px 18px;border-top:1px solid var(--clr-border);color:var(--clr-text-muted);vertical-align:top; }
+    .data-table tbody tr:hover td { background:rgba(99,202,255,.03); }
+    .data-key { font-family:var(--font-mono);font-size:.80rem;color:var(--clr-text); }
+
+    /* Alerts */
+    .alert { border-radius:var(--radius-md);padding:16px 20px;margin:20px 0;border-left:3px solid;font-size:.9rem; }
+    .alert-safe    { background:rgba(0,229,192,.06);border-color:var(--clr-safe);color:#a7f3e5; }
+    .alert-warning { background:rgba(255,184,77,.06);border-color:var(--clr-warning);color:#ffe4b0; }
+    .alert-info    { background:rgba(99,202,255,.06);border-color:var(--clr-accent);color:#c0e8ff; }
+    .alert strong  { display:block;margin-bottom:4px;font-weight:600; }
+
+    /* Code block */
+    .code-block { background:#060a10;border:1px solid rgba(99,202,255,.15);border-radius:var(--radius-md);padding:18px 20px;font-family:var(--font-mono);font-size:.80rem;color:#a0c4d8;overflow-x:auto;margin:16px 0;line-height:1.7; }
+    .code-block .kw  { color:#7b61ff; }
+    .code-block .str { color:#00e5c0; }
+    .code-block .cmt { color:#4a5568; }
+
+    /* Lists */
+    .section ul,.section ol { padding-left:0;list-style:none;margin:14px 0; }
+    .section ul li,.section ol li { position:relative;padding-left:22px;margin-bottom:10px;color:var(--clr-text-muted);font-size:.93rem; }
+    .section ul li::before { content:'▸';position:absolute;left:0;color:var(--clr-accent-3);font-size:.75rem;top:3px; }
+    .section ol { counter-reset:ol-counter; }
+    .section ol li { counter-increment:ol-counter; }
+    .section ol li::before { content:counter(ol-counter)'.';position:absolute;left:0;color:var(--clr-accent-2);font-family:var(--font-mono);font-size:.78rem;top:2px;font-weight:600; }
+
+    /* Highlight helpers */
+    .hl        { color:var(--clr-accent);font-weight:600; }
+    .hl-green  { color:var(--clr-safe);font-weight:600; }
+    .hl-purple { color:var(--clr-accent-2);font-weight:600; }
+    .hl-orange { color:var(--clr-warning);font-weight:600; }
+
+    /* Contact */
+    .contact-card { background:linear-gradient(135deg,rgba(99,202,255,.06) 0%,rgba(123,97,255,.06) 100%);border:1px solid var(--clr-border);border-radius:var(--radius-xl);padding:40px 36px;text-align:center; }
+    .contact-card .big-icon { font-size:3rem;display:block;margin-bottom:16px; }
+    .contact-card h2 { font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:10px; }
+    .contact-card p  { color:var(--clr-text-muted);margin-bottom:20px;font-size:.95rem; }
+    .contact-card a  { display:inline-block;background:linear-gradient(135deg,var(--clr-accent) 0%,var(--clr-accent-2) 100%);color:#fff;font-weight:700;font-size:.88rem;letter-spacing:.06em;text-decoration:none;padding:12px 28px;border-radius:999px;transition:opacity .2s,transform .2s; }
+    .contact-card a:hover { opacity:.85;transform:translateY(-2px); }
+
+    /* Footer */
+    footer { text-align:center;padding:40px 24px 60px;color:var(--clr-text-dim);font-size:.82rem;line-height:2;position:relative;z-index:1; }
+    footer .footer-brand { font-size:1rem;font-weight:700;color:var(--clr-text-muted);margin-bottom:8px; }
+    footer a { color:var(--clr-accent);text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+
+    /* Progress bar */
+    #progress-bar { position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--clr-accent-3),var(--clr-accent),var(--clr-accent-2));z-index:1000;transition:width .1s linear; }
+
+    /* Top button */
+    #top-btn { position:fixed;bottom:28px;right:28px;width:46px;height:46px;background:rgba(14,20,32,.9);border:1px solid var(--clr-border);border-radius:50%;color:var(--clr-accent);font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:background .2s,transform .2s;z-index:999; }
+    #top-btn:hover { background:rgba(99,202,255,.12);transform:translateY(-3px); }
+
+    @media (max-width:600px) {
+      .quick-facts { grid-template-columns:repeat(2,1fr); }
+      .hero { padding:60px 0 40px; }
+      .toc ol { grid-template-columns:1fr; }
+      .card { padding:18px 20px; }
+      .contact-card { padding:28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar" role="progressbar" aria-label="Reading progress"></div>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="orb orb-3" aria-hidden="true"></div>
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-badge"><span class="dot" aria-hidden="true"></span>100% Verified &amp; Offline-Only</div>
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">3D Snake is a fully offline, zero-data-collection Android game. This policy documents every technical detail verified directly from the source code.</p>
+    <div class="hero-meta">
+      <span>&#127918; App: <strong>3D Snake</strong></span>
+      <span>&#128230; Package: <strong>com.example.a3dmastersnake</strong></span>
+      <span>&#128197; Effective: <strong>October 14, 2026</strong></span>
+    </div>
+  </header>
+
+  <!-- QUICK FACTS -->
+  <div class="quick-facts" role="list" aria-label="Privacy quick facts">
+    <div class="fact-card" role="listitem"><span class="icon" aria-hidden="true">&#128683;</span><span class="label">Data Collected</span><span class="value">None whatsoever</span></div>
+    <div class="fact-card" role="listitem"><span class="icon" aria-hidden="true">&#127760;</span><span class="label">Internet</span><span class="value">Not used &middot; No permission</span></div>
+    <div class="fact-card" role="listitem"><span class="icon" aria-hidden="true">&#128225;</span><span class="label">Third-Party SDKs</span><span class="value">Zero &middot; None included</span></div>
+    <div class="fact-card" role="listitem"><span class="icon" aria-hidden="true">&#128274;</span><span class="label">Ads / Analytics</span><span class="value">None &middot; Never</span></div>
+    <div class="fact-card" role="listitem"><span class="icon" aria-hidden="true">&#128190;</span><span class="label">Data Storage</span><span class="value">On-device only</span></div>
+    <div class="fact-card" role="listitem"><span class="icon" aria-hidden="true">&#128118;</span><span class="label">Age Suitability</span><span class="value">All ages &middot; COPPA safe</span></div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview">Overview &amp; Scope</a></li>
+      <li><a href="#permissions">Android Permissions</a></li>
+      <li><a href="#no-internet">No Internet Access</a></li>
+      <li><a href="#no-third-party">No Third-Party Libraries</a></li>
+      <li><a href="#local-data">Local Data Storage</a></li>
+      <li><a href="#audio">Audio System</a></li>
+      <li><a href="#vibration">Vibration (Haptics)</a></li>
+      <li><a href="#what-we-collect">What We Collect</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#data-security">Data Security</a></li>
+      <li><a href="#your-rights">Your Rights</a></li>
+      <li><a href="#code-audit">Source Code Audit</a></li>
+      <li><a href="#changes">Policy Changes</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </nav>
+
+  <!-- 01 OVERVIEW -->
+  <section class="section" id="overview">
+    <div class="section-header"><span class="section-number">01</span><h2>Overview &amp; Scope</h2></div>
+    <p>This Privacy Policy applies to the Android mobile game <span class="hl">3D Snake</span> (package ID: <span class="hl-purple">com.example.a3dmastersnake</span>), developed independently and distributed on Google Play. The game targets Android <span class="hl">API 24 (Android 7.0)</span> and above, compiled against <span class="hl">API 36</span>.</p>
+    <div class="alert alert-safe">
+      <strong>&#10003; Zero-Data-Collection Statement</strong>
+      3D Snake does not collect, transmit, store on any server, sell, rent, or share any personal data, usage data, behavioral data, or any other information about its players — ever. This has been independently verified by a full review of all source files.
+    </div>
+    <p>The game is fully self-contained: game logic, sound synthesis, rendering, and all user preference storage happen entirely on the player's device with no outbound network communication of any kind.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 02 PERMISSIONS -->
+  <section class="section" id="permissions">
+    <div class="section-header"><span class="section-number">02</span><h2>Android Permissions Declared</h2></div>
+    <p>The <span class="hl">AndroidManifest.xml</span> declares <span class="hl">exactly one (1)</span> Android permission. Every other permission category — including internet access, camera, microphone, location, contacts, storage, phone state, Bluetooth, and sensors — is completely absent.</p>
+
+    <table class="perm-table" role="table" aria-label="Declared Android permissions">
+      <thead>
+        <tr>
+          <th scope="col">Permission</th>
+          <th scope="col">Reason Requested</th>
+          <th scope="col">Data Risk</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="perm-name">android.permission.VIBRATE</span></td>
+          <td>Controls the device's haptic motor to produce in-game feedback pulses (food eaten, game over, power-up). This is a <em>non-dangerous</em>, Normal permission.</td>
+          <td>None — this permission only actuates hardware; it cannot read any data.</td>
+          <td><span class="pill pill-safe">&#10003; Safe</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-info">
+      <strong>&#8505; About the VIBRATE Permission</strong>
+      <code>android.permission.VIBRATE</code> is classified as a <strong>Normal Permission</strong> (Protection Level: normal). It is granted automatically at install time without any runtime dialog. It has zero capability to read, write, transmit, or access any user data.
+    </div>
+
+    <h3>Permissions Explicitly NOT Requested</h3>
+    <ul>
+      <li><strong>INTERNET</strong> — No network access. The game is 100% offline.</li>
+      <li><strong>ACCESS_NETWORK_STATE / ACCESS_WIFI_STATE</strong> — Not requested.</li>
+      <li><strong>READ / WRITE_EXTERNAL_STORAGE</strong> — All saves use internal SharedPreferences only.</li>
+      <li><strong>CAMERA</strong> — Not used. Not requested.</li>
+      <li><strong>RECORD_AUDIO</strong> — All audio is procedurally synthesized; no microphone access.</li>
+      <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong> — Not requested. Location never used.</li>
+      <li><strong>READ_CONTACTS / READ_PHONE_STATE</strong> — Not requested. No PII accessed.</li>
+      <li><strong>BLUETOOTH</strong> — Not requested.</li>
+      <li><strong>MANAGE_EXTERNAL_STORAGE</strong> — Not requested.</li>
+      <li><strong>BILLING / in-app purchases</strong> — No purchases. No billing permission.</li>
+    </ul>
+
+    <div class="code-block">
+<span class="cmt">&lt;!-- AndroidManifest.xml — complete permissions block --&gt;</span>
+
+<span class="kw">&lt;uses-feature</span> android:glEsVersion=<span class="str">"0x00030000"</span> android:required=<span class="str">"true"</span> <span class="kw">/&gt;</span>
+<span class="kw">&lt;uses-permission</span> android:name=<span class="str">"android.permission.VIBRATE"</span> <span class="kw">/&gt;</span>
+
+<span class="cmt">&lt;!-- No other permissions exist in this manifest --&gt;</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 03 NO INTERNET -->
+  <section class="section" id="no-internet">
+    <div class="section-header"><span class="section-number">03</span><h2>No Internet Access — Fully Offline</h2></div>
+    <div class="alert alert-safe">
+      <strong>&#10003; Confirmed: No Network Communication</strong>
+      The game does not declare the <code>android.permission.INTERNET</code> permission. Without this permission, Android's security sandbox physically prevents any network socket from opening. No data can leave the device.
+    </div>
+    <p>A full text search of all Kotlin source files confirms <span class="hl">zero references</span> to any networking class: <span class="hl-purple">HttpURLConnection</span>, <span class="hl-purple">OkHttp</span>, <span class="hl-purple">Retrofit</span>, <span class="hl-purple">Volley</span>, <span class="hl-purple">Socket</span>, <span class="hl-purple">URL</span>, <span class="hl-purple">WebView</span>, or any Firebase / analytics SDK.</p>
+    <p>The only external links in the app are inside the Settings screen as two <em>user-triggered</em> optional actions that open external apps:</p>
+    <ul>
+      <li><span class="hl">&#11088; Rate Us on Play Store</span> — Launches the Play Store app to the game listing. No data is sent by 3D Snake itself.</li>
+      <li><span class="hl">&#9993; Send Feedback via Gmail</span> — Fires an Android <code>ACTION_SENDTO</code> intent opening Gmail compose. No game data is transmitted; the user controls what they send.</li>
+    </ul>
+    <div class="alert alert-warning">
+      <strong>&#9888; User-Initiated Actions Note</strong>
+      When users tap "Rate Us" or "Email Feedback" they leave 3D Snake and enter Google Play or Gmail respectively. Those apps are governed by Google's own privacy policies, not this one.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 04 NO THIRD-PARTY -->
+  <section class="section" id="no-third-party">
+    <div class="section-header"><span class="section-number">04</span><h2>No Third-Party Libraries or SDKs</h2></div>
+    <p>The <span class="hl">app/build.gradle.kts</span> dependency block has been inspected in full. All dependencies are <span class="hl">standard Android Jetpack / Google components</span> used exclusively for UI scaffolding — not for analytics, advertising, or data collection.</p>
+
+    <table class="data-table" role="table" aria-label="Build dependencies">
+      <thead>
+        <tr><th scope="col">Dependency</th><th scope="col">Type</th><th scope="col">Purpose</th><th scope="col">Collects Data?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="data-key">androidx.core.ktx</span></td><td>AndroidX</td><td>Kotlin extensions for Android APIs (window management, insets)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">androidx.appcompat</span></td><td>AndroidX</td><td>Backward-compatible Activity / Window features</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">material</span></td><td>Google Material</td><td>Material Design UI components (buttons, themes)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">androidx.activity</span></td><td>AndroidX</td><td>Back-press handling (<code>OnBackPressedDispatcher</code>)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">androidx.constraintlayout</span></td><td>AndroidX</td><td>Responsive layout for different screen sizes</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">junit / androidx.junit / espresso</span></td><td>Test only</td><td>Unit/UI testing (never in release APK)</td><td><span class="pill pill-safe">No</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-safe">
+      <strong>&#10003; Confirmed: Zero Analytics, Ads, or Tracking SDKs</strong>
+      No Firebase, AdMob, Adjust, AppsFlyer, Facebook SDK, Unity Ads, Crashlytics, Amplitude, Mixpanel, Branch, or any similar SDK is present in the dependency tree.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 05 LOCAL DATA -->
+  <section class="section" id="local-data">
+    <div class="section-header"><span class="section-number">05</span><h2>Local Data Storage — On-Device Only</h2></div>
+    <p>The game stores player preferences and progress using Android's <span class="hl">SharedPreferences</span> API (file name: <span class="hl-purple">three_d_snake_prefs</span>). This file is stored in the app's private internal sandbox and is <strong>never uploaded, transmitted, or shared</strong> with any party.</p>
+
+    <table class="data-table" role="table" aria-label="Locally stored data keys">
+      <thead>
+        <tr><th scope="col">Key (SharedPreferences)</th><th scope="col">Type</th><th scope="col">What It Stores</th><th scope="col">Personal Data?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="data-key">high_score_&lt;mode&gt;</span></td><td>Int</td><td>Best score per game mode (CLASSIC, TIME_ATTACK, ENDLESS, CHALLENGE)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">max_length</span></td><td>Int</td><td>Longest snake ever achieved</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">total_food</span></td><td>Int</td><td>Cumulative food items collected across all sessions</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">games_played</span></td><td>Int</td><td>Total number of games started</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">total_survival_time</span></td><td>Float</td><td>Total seconds survived across all sessions</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">selected_skin</span></td><td>String</td><td>Player's chosen snake skin ID (e.g., "classic", "neon", "fire")</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">skin_unlocked_&lt;id&gt;</span></td><td>Boolean</td><td>Whether a specific skin has been unlocked by score threshold</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">music_enabled</span></td><td>Boolean</td><td>Music on/off preference</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">sound_enabled</span></td><td>Boolean</td><td>Sound effects on/off preference</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">music_volume</span></td><td>Float</td><td>Music volume level (0.0–1.0)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">sfx_volume</span></td><td>Float</td><td>SFX volume level (0.0–1.0)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">vibration_enabled</span></td><td>Boolean</td><td>Haptic feedback on/off preference</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">difficulty</span></td><td>String</td><td>Selected difficulty (EASY / NORMAL / HARD / EXPERT)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">game_mode</span></td><td>String</td><td>Selected game mode (CLASSIC / TIME_ATTACK / ENDLESS / CHALLENGE)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">sensitivity</span></td><td>Float</td><td>Touch control sensitivity multiplier</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">graphics_quality</span></td><td>String</td><td>Graphics quality setting (LOW / MEDIUM / HIGH)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">debug_enabled</span></td><td>Boolean</td><td>Developer debug overlay toggle</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">show_virtual_buttons</span></td><td>Boolean</td><td>Whether on-screen directional buttons are displayed</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">auto_move_enabled</span></td><td>Boolean</td><td>Whether snake moves automatically (continuous movement setting)</td><td><span class="pill pill-safe">No</span></td></tr>
+        <tr><td><span class="data-key">save_version</span></td><td>Int</td><td>Internal schema version for save-data migration</td><td><span class="pill pill-safe">No</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-safe">
+      <strong>&#10003; None of the stored values constitute Personal Data</strong>
+      No names, email addresses, phone numbers, device identifiers, IP addresses, advertising IDs (GAID), or any other personally identifiable information (PII) is stored anywhere in the game's save system.
+    </div>
+
+    <h3>Android Auto-Backup</h3>
+    <p>Android may include the app's SharedPreferences in device-to-device transfers via Google's Auto Backup service (if the user has enabled this in system settings). This backup contains only the non-personal game preference values listed above. The app's <span class="hl">backup_rules.xml</span> and <span class="hl">data_extraction_rules.xml</span> have been reviewed and do not configure any additional sensitive data for backup.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 06 AUDIO -->
+  <section class="section" id="audio">
+    <div class="section-header"><span class="section-number">06</span><h2>Audio System — 100% Procedural, No Files</h2></div>
+    <p>All sound effects and background music in 3D Snake are <span class="hl">synthesized in real-time using mathematics</span>. The game does not load, read, or stream any audio files from storage or the internet.</p>
+
+    <div class="card">
+      <div class="card-title">&#127925; How the Audio Engine Works</div>
+      <p>The custom <span class="hl-purple">AudioManager</span> class uses Android's native <code>android.media.AudioTrack</code> API exclusively. Audio is generated by computing sine-wave samples, frequency sweeps, arpeggio chords, and noise envelopes entirely in memory using pure Kotlin/Java math. A fixed thread pool of 2 threads handles sound events asynchronously. No external audio library, no asset files (.mp3, .ogg, .wav), and no network streaming is involved.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">&#127908; Sound Events Generated On-Device</div>
+      <p><span class="hl-green">playClick()</span> — Frequency sweep for menu taps &middot; <span class="hl-green">playEat()</span> — Rising tone on food collection &middot; <span class="hl-green">playPowerUp()</span> — Arpeggio chord for power-ups &middot; <span class="hl-green">playCombo()</span> — Dynamic frequency scaling on combos &middot; <span class="hl-green">playCollision()</span> — Noise burst on crash &middot; <span class="hl-green">playGameOver()</span> — Descending arpeggio &middot; <span class="hl-green">startMusic()</span> — Looping procedural melody (pentatonic scale).</p>
+    </div>
+
+    <p>The <span class="hl">RECORD_AUDIO</span> permission is <strong>not declared</strong>. The microphone is never accessed.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 07 VIBRATION -->
+  <section class="section" id="vibration">
+    <div class="section-header"><span class="section-number">07</span><h2>Vibration (Haptic Feedback)</h2></div>
+    <p>The game uses Android's <code>android.os.Vibrator</code> / <code>android.os.VibratorManager</code> API to provide tactile feedback during gameplay events. This feature:</p>
+    <ul>
+      <li>Only <em>actuates</em> the device's haptic motor; it cannot read any data.</li>
+      <li>Is always <span class="hl">user-controllable</span> via the in-game Settings screen (can be fully disabled).</li>
+      <li>Triggers on three intensity levels: Light (25 ms), Medium (55 ms), Heavy (70+90 ms waveform pattern).</li>
+      <li>Gracefully handles devices with no vibrator hardware.</li>
+      <li>No vibration pattern encodes any user data.</li>
+    </ul>
+    <div class="alert alert-info">
+      <strong>&#8505; Vibration Events</strong>
+      Light — food eaten, boost activated &middot; Medium — power-up collected, shield consumed &middot; Heavy — AI snake killed, player death / game over.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 08 WHAT WE COLLECT -->
+  <section class="section" id="what-we-collect">
+    <div class="section-header"><span class="section-number">08</span><h2>What We Collect — Definitive Answer</h2></div>
+    <div class="alert alert-safe">
+      <strong>&#10003; We collect absolutely nothing.</strong>
+      No personal information, no device identifiers, no usage analytics, no crash reports, no gameplay telemetry, no behavioral data, no location data, no contact information, and no financial information is ever collected, stored on any server, or shared with any third party.
+    </div>
+
+    <table class="data-table" role="table" aria-label="Data collection summary">
+      <thead>
+        <tr><th scope="col">Data Category</th><th scope="col">Collected?</th><th scope="col">Transmitted?</th><th scope="col">Shared?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Name / Email / Phone</td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+        <tr><td>Device ID / Advertising ID</td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+        <tr><td>IP Address / Location</td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+        <tr><td>Crash Reports / Error Logs</td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+        <tr><td>Usage / Analytics Events</td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+        <tr><td>Purchase / Payment Info</td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+        <tr><td>Game Scores &amp; Stats</td><td><span class="pill pill-warning">On-device only</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+        <tr><td>User Preferences / Settings</td><td><span class="pill pill-warning">On-device only</span></td><td><span class="pill pill-safe">Never</span></td><td><span class="pill pill-safe">Never</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 09 CHILDREN -->
+  <section class="section" id="children">
+    <div class="section-header"><span class="section-number">09</span><h2>Children's Privacy (COPPA Compliance)</h2></div>
+    <p>3D Snake is appropriate for all ages, including children under 13. Because the game <strong>collects no personal information from anyone</strong>, it is inherently compliant with COPPA (Children's Online Privacy Protection Act) and similar international regulations (GDPR-K, CCPA).</p>
+    <ul>
+      <li>No account registration, login, or user profile is required.</li>
+      <li>No name, age, email, or parental consent information is ever requested.</li>
+      <li>No online features, chat, or social connectivity exists.</li>
+      <li>No advertising of any kind is displayed.</li>
+      <li>No in-app purchases are available.</li>
+      <li>All unlockable content (skins) is earned through gameplay, not spending.</li>
+    </ul>
+    <div class="alert alert-safe">
+      <strong>&#10003; Safe for Children of All Ages</strong>
+      Parents and guardians can confidently allow children of any age to play 3D Snake without any privacy concerns. No data ever leaves the device.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 10 DATA SECURITY -->
+  <section class="section" id="data-security">
+    <div class="section-header"><span class="section-number">10</span><h2>Data Security</h2></div>
+    <p>Since no data is transmitted over a network, there is no risk of interception, man-in-the-middle attacks, or data breaches from 3D Snake's servers — because there are none. Local storage security is provided by Android's built-in protections:</p>
+    <ul>
+      <li><strong>App Sandbox:</strong> SharedPreferences files are stored in the app's private data directory (<code>/data/data/com.example.a3dmastersnake/</code>), inaccessible to other apps without root access.</li>
+      <li><strong>Android Process Isolation:</strong> The OS enforces strict separation between app processes.</li>
+      <li><strong>No Sensitive Data at Risk:</strong> Even if a device were compromised, the only data exposed would be high scores and preference settings — no personal information.</li>
+      <li><strong>ProGuard / R8 Minification:</strong> The release APK is obfuscated and minified, reducing the attack surface further.</li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 11 YOUR RIGHTS -->
+  <section class="section" id="your-rights">
+    <div class="section-header"><span class="section-number">11</span><h2>Your Rights</h2></div>
+    <p>Under privacy regulations such as GDPR (EU), CCPA (California), and similar laws, users have the right to access, correct, and delete their personal data. Since <span class="hl">3D Snake collects no personal data</span>, these rights are automatically fulfilled — there is nothing to access, correct, or delete on our end.</p>
+
+    <h3>Deleting Your Local Game Data</h3>
+    <p>You can delete all locally stored game data (high scores, settings, unlocked skins) at any time:</p>
+    <ol>
+      <li>Open your device's <strong>Settings</strong> app.</li>
+      <li>Navigate to <strong>Apps</strong> (or Application Manager).</li>
+      <li>Find and tap <strong>3D Snake</strong>.</li>
+      <li>Tap <strong>Storage</strong>, then <strong>Clear Data</strong>.</li>
+    </ol>
+    <p>Alternatively, uninstalling the app permanently removes all locally stored data.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 12 CODE AUDIT -->
+  <section class="section" id="code-audit">
+    <div class="section-header"><span class="section-number">12</span><h2>Source Code Audit Summary</h2></div>
+    <p>The following is a summary of the code-level review performed to verify every claim in this policy. All Kotlin source files were examined.</p>
+
+    <div class="card">
+      <div class="card-title">&#128193; Files Audited</div>
+      <p><code>AndroidManifest.xml</code> &middot; <code>app/build.gradle.kts</code> &middot; <code>build.gradle.kts</code> &middot; <code>MainActivity.kt</code> &middot; <code>GameManager.kt</code> &middot; <code>SaveManager.kt</code> &middot; <code>AudioManager.kt</code> &middot; <code>VibrationManager.kt</code> &middot; <code>GameLoop.kt</code> &middot; <code>GameState.kt</code> &middot; <code>GameMode.kt</code> &middot; <code>Difficulty.kt</code> &middot; All UI controllers (HUD, Menu, Dialogs, Screens, Splash) &middot; All rendering, food, obstacle, power-up, snake, input, and utility packages.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">&#128269; Audit Findings</div>
+      <p>
+        <span class="hl-green">&#10003; No INTERNET permission</span> — Confirmed absent from Manifest.<br/>
+        <span class="hl-green">&#10003; No networking code</span> — Zero occurrences of HttpURLConnection, OkHttp, Retrofit, Socket, URL, URLConnection, or WebView in any source file.<br/>
+        <span class="hl-green">&#10003; No analytics SDK</span> — No Firebase, Crashlytics, Amplitude, Mixpanel, Adjust, or similar dependency.<br/>
+        <span class="hl-green">&#10003; No ad SDK</span> — No AdMob, Unity Ads, AppLovin, Facebook Audience Network, or similar.<br/>
+        <span class="hl-green">&#10003; No device ID access</span> — No calls to <code>Settings.Secure.ANDROID_ID</code>, <code>TelephonyManager</code>, or <code>AdvertisingIdClient</code>.<br/>
+        <span class="hl-green">&#10003; Audio is 100% synthetic</span> — All audio generated via <code>AudioTrack</code> from math; no file assets, no streaming.<br/>
+        <span class="hl-green">&#10003; Single permission</span> — Only <code>VIBRATE</code> (Normal level) declared in Manifest.<br/>
+        <span class="hl-green">&#10003; Local-only storage</span> — SharedPreferences only; no remote database, no cloud sync of game data.<br/>
+        <span class="hl-orange">&#9888; Auto-Backup note</span> — Android may back up SharedPreferences to Google's servers per the user's own system backup settings. This backup contains only non-personal game preference data as documented in Section 5.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 13 CHANGES -->
+  <section class="section" id="changes">
+    <div class="section-header"><span class="section-number">13</span><h2>Policy Changes</h2></div>
+    <p>We may update this Privacy Policy if the app's functionality changes significantly. Any update will be reflected with a new "Effective Date" at the top of this page. We encourage users to review this policy periodically.</p>
+    <p>Since 3D Snake collects no data, any future change that would involve data collection would represent a material change and would be prominently communicated through an updated policy, a new app store listing description, and a new version release.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 14 CONTACT -->
+  <div class="contact-card" id="contact">
+    <span class="big-icon" aria-hidden="true">&#9993;</span>
+    <h2>Questions? Contact Us</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or the privacy practices of 3D Snake, please reach out via the feedback option inside the app's Settings screen.</p>
+    <a href="mailto:?subject=3D%20Snake%20Privacy%20Policy%20Query" id="contact-email-btn">Open Email</a>
+    <br/><br/>
+    <p style="font-size:.82rem;color:var(--clr-text-dim);">
+      Feedback option inside app:<br/>
+      <strong style="color:var(--clr-text-muted);">3D Snake &#8594; Settings &#8594; &#9993; Send Feedback</strong>
+    </p>
+  </div>
+
+</div><!-- /.wrapper -->
+
+<footer>
+  <div class="footer-brand">3D Snake</div>
+  <div>Package: <code>com.example.a3dmastersnake</code> &nbsp;&middot;&nbsp; Version 1.0</div>
+  <div>Privacy Policy &mdash; Effective Date: <strong>October 14, 2026</strong></div>
+  <div style="margin-top:12px">
+    <span class="pill pill-safe" style="display:inline-flex">&#10003; No Data Collected</span>
+    &nbsp;
+    <span class="pill pill-safe" style="display:inline-flex">&#10003; No Internet Used</span>
+    &nbsp;
+    <span class="pill pill-safe" style="display:inline-flex">&#10003; No Third-Party SDKs</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var bar=document.getElementById('progress-bar');
+    window.addEventListener('scroll',function(){
+      var s=document.documentElement.scrollTop||document.body.scrollTop;
+      var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+      bar.style.width=(h>0?(s/h)*100:0)+'%';
+    },{passive:true});
+  })();
+  (function(){
+    var btn=document.getElementById('top-btn');
+    window.addEventListener('scroll',function(){
+      btn.style.display=window.scrollY>300?'flex':'none';
+    },{passive:true});
+  })();
+  document.querySelectorAll('.toc a').forEach(function(link){
+    link.addEventListener('click',function(){
+      document.querySelectorAll('.toc a').forEach(function(l){l.style.color='';});
+      link.style.color='var(--clr-accent)';
+      setTimeout(function(){link.style.color='';},2000);
+    });
+  });
+</script>
+</body>
+</html>
